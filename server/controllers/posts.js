@@ -1,5 +1,5 @@
-import Post from "../controllers/Post";
-import User from "../models/User";
+import Post from "../models/Post.js";
+import User from "../models/User.js";
 
 export const createPost = async(req, res) => {
     try{
@@ -69,7 +69,7 @@ export const likePost = async(req, res) => {
         const { userId } = req.body;  // A user who likes/dislikes
 
         const post = await Post.findById( idOfPost );
-        const isLiked = post.likes.get(userId);
+        const isLiked = post.likes.get( userId );
 
         if(isLiked) {
             post.likes.delete(userId) ;
@@ -78,7 +78,13 @@ export const likePost = async(req, res) => {
             post.likes.set(userId, true);
         }
 
-        res.status(200).json();
+        const updatedPost = await Post.findByIdAndUpdate(
+            idOfPost, 
+            { likes: post.likes },
+            { new: true }
+        );
+
+        res.status(200).json(updatedPost);
     }
     catch(err){
         res.status(404).json({ message: err.message});       

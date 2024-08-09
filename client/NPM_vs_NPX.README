@@ -1,0 +1,5 @@
+NPM --> Node Package Manager
+NPX --> Node Package Execute
+
+NPM ==> It installs the package and then executes it.
+NPX ==> Directly executes and then Uninstalls that package(Installs temporarily -> Executes the package -> Uninstalls it).

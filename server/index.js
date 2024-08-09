@@ -1,3 +1,8 @@
+/* ES Modules ---> 
+    i.) Using 'import' keyword and 'export default' keyword,
+   ii.) for importing use full file name(including --> .js)
+*/
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -14,9 +19,14 @@ import postRoutes from "./routes/posts.js";
 import { register } from "./controllers/auth.js";
 import { verifyToken } from "./middleware/auth.js";
 import { createPost } from "./controllers/posts.js";
-// import User from "./models/User.js";
-// import Post from "./models/Post.js";
-// import { users, posts } from "./data/index.js";
+ 
+/* 
+***This is required for the first time to insert dummy users and dummy posts***
+
+    import User from "./models/User.js";
+    import Post from "./models/Post.js";
+    import { users, posts } from "./data/index.js";
+*/
 
 
 /* CONFIGURATIONS */  // Don't know
@@ -52,9 +62,10 @@ mongoose.connect(process.env.MONGO_URL)
 .then(() => {
   app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
-  /* ADD DATA ONE TIME */
+  /* ADD DATA ONE TIME(First time to insert dummy users and dummy posts) */
   // User.insertMany(users);
-  // Post.insertMany(posts); 
+  // Post.insertMany(posts);
+
 })
 .catch((error) => {
   console.log(`${error} --> Did not connect!`);
